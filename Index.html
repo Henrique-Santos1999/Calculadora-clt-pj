@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora CLT vs PJ | Quanto cobrar como PJ?</title>
+    <meta name="description" content="Descubra qual deve ser seu salário PJ equivalente à sua proposta ou contrato CLT. Simule valor de férias, 13º, FGTS e benefícios.">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --accent: #10b981;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Espaços para Anúncios */
+        .ad-banner {
+            background-color: #e2e8f0;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        button.btn-calc {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        button.btn-calc:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .results {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .result-box {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .result-box.highlight {
+            background-color: #ecfdf5;
+            border-left-color: var(--accent);
+        }
+
+        .result-box h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .result-box .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text);
+            margin-top: 5px;
+        }
+
+        .result-box.highlight .price {
+            color: var(--accent);
+        }
+
+        .detail-list {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .detail-list li {
+            margin-bottom: 4px;
+            list-style: none;
+        }
+
+        /* Seção SEO / FAQ */
+        .seo-content {
+            margin-top: 40px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .seo-content h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .seo-content p {
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-item h3 {
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Calculadora CLT vs PJ</h1>
+        <p>Descubra quanto você realmente precisa faturar como PJ para igualar seu salário CLT.</p>
+    </header>
+
+    <!-- ESPAÇO PARA ANÚNCIO TOP_BANNER -->
+    <div class="ad-banner">
+        <!-- Cole o código do seu anúncio aqui (AdSense / Monetag) -->
+        <span>Espaço para Anúncio (Topo)</span>
+    </div>
+
+    <div class="main-grid">
+        <!-- Formulário -->
+        <div class="card">
+            <h2>Dados do Contrato CLT</h2>
+            <div class="form-group">
+                <label for="salario">Salário Bruto Mensal CLT (R$)</label>
+                <input type="number" id="salario" placeholder="Ex: 5000" value="5000">
+            </div>
+            <div class="form-group">
+                <label for="beneficios">Benefícios Mensais (VR, VT, Plano de Saúde) (R$)</label>
+                <input type="number" id="beneficios" placeholder="Ex: 800" value="800">
+            </div>
+            <div class="form-group">
+                <label for="impostoPJ">Alíquota Média de Imposto PJ (%)</label>
+                <input type="number" id="impostoPJ" placeholder="Ex: 6 para Simples Nacional" value="6">
+            </div>
+            <button class="btn-calc" onclick="calcular()">Calcular Equivalente PJ</button>
+        </div>
+
+        <!-- Resultados -->
+        <div class="card">
+            <h2>Resultado da Comparação</h2>
+            <div class="results">
+                <div class="result-box">
+                    <h3>Valor Total Anual CLT em Dinheiro</h3>
+                    <div class="price" id="totalCLT">R$ 0,00</div>
+                    <ul class="detail-list">
+                        <li>Inclui: 12 Salários + 13º + Férias + 1/3 Férias + FGTS + Benefícios</li>
+                    </ul>
+                </div>
+
+                <div class="result-box highlight">
+                    <h3>Faturamento Mínimo PJ Recomendado</h3>
+                    <div class="price" id="faturamentoPJ">R$ 0,00 / mês</div>
+                    <ul class="detail-list">
+                        <li>Ideal para cobrir impostos PJ e igualar ao valor de mercado do seu CLT.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESPAÇO PARA ANÚNCIO MEIO -->
+    <div class="ad-banner">
+        <!-- Cole o código do seu anúncio aqui -->
+        <span>Espaço para Anúncio (Meio)</span>
+    </div>
+
+    <!-- Seção de Conteúdo para o Google (SEO) -->
+    <section class="seo-content">
+        <h2>Como Funciona o Cálculo CLT vs. PJ?</h2>
+        <p>Ao comparar uma proposta <strong>CLT (Consolidação das Leis do Trabalho)</strong> com um contrato <strong>PJ (Pessoa Jurídica)</strong>, é comum olhar apenas para o valor bruto mensal. No entanto, o contrato CLT oferece uma série de benefícios indiretos e obrigações trabalhistas que aumentam o valor real do pacote recebido pelo profissional.</p>
+
+        <h2>Perguntas Frequentes (FAQ)</h2>
+        
+        <div class="faq-item">
+            <h3>Quais benefícios o CLT tem que o PJ precisa compensar?</h3>
+            <p>O trabalhador CLT recebe 13º salário, férias remuneradas acrescidas de 1/3 constitucional, depósito de 8% de FGTS mensal, além de benefícios como Vale Refeição, Vale Transporte e Plano de Saúde. O valor sugerido para o PJ cobre essa diferença.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Quanto um PJ paga de imposto no Simples Nacional?</h3>
+            <p>Para a maioria dos serviços de tecnologia e consultoria enquadrados no Anexo III do Simples Nacional, a alíquota inicial é de 6% sobre o faturamento mensal (para faturamento até R$ 180 mil/ano).</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>É necessário ter contador sendo PJ?</h3>
+            <p>Se você for MEI, não é obrigatório ter contador. Porém, se o seu faturamento exigir a abertura de uma microempresa (ME) no Simples Nacional, a legislação brasileira exige a assinatura de um contador responsável.</p>
+        </div>
+    </section>
+
+    <!-- ESPAÇO PARA ANÚNCIO RODAPÉ -->
+    <div class="ad-banner">
+        <!-- Cole o código do seu anúncio aqui -->
+        <span>Espaço para Anúncio (Rodapé)</span>
+    </div>
+
+    <footer>
+        <p>© <span id="year"></span> Calculadora CLT vs PJ - Ferramenta Gratuita.</p>
+    </footer>
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function calcular() {
+        const salario = parseFloat(document.getElementById('salario').value) || 0;
+        const beneficios = parseFloat(document.getElementById('beneficios').value) || 0;
+        const impostoPJ = (parseFloat(document.getElementById('impostoPJ').value) || 6) / 100;
+
+        // Cálculo Total Anual CLT
+        // 12 Salários + 13º + 1 Salário de Férias + 1/3 Adicional de Férias = 14.333 Salários
+        const salarioAnualBase = salario * 14.333;
+        
+        // FGTS: 8% ao mês por 12 meses + FGTS sobre o 13º = ~ 1.04 salários de FGTS ao ano
+        const fgtsAnual = salario * 12 * 0.08;
+
+        // Benefícios Anuais
+        const beneficiosAnuais = beneficios * 12;
+
+        // Custo/Benefício Total Anual do CLT
+        const totalAnualCLT = salarioAnualBase + fgtsAnual + beneficiosAnuais;
+
+        // Equivalente Mensal Média CLT
+        const equivalenteMensalCLT = totalAnualCLT / 12;
+
+        // Cálculo Mínimo PJ considerando Impostos e margem para reserva de férias
+        // Adiciona 10% extra no PJ como margem de segurança para períodos sem trabalhar
+        const faturamentoPJMensal = (equivalenteMensalCLT / (1 - impostoPJ)) * 1.10;
+
+        // Formatação em Reais
+        document.getElementById('totalCLT').textContent = totalAnualCLT.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        document.getElementById('faturamentoPJ').textContent = faturamentoPJMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + ' / mês';
+    }
+
+    // Executa ao carregar
+    calcular();
+</script>
+
+</body>
+</html>
